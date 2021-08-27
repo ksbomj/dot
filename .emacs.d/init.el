@@ -9,7 +9,7 @@
 (load-library "packages")
 
 ;; Features
-(load-library "dashboard")
+(load-library "workspace-dashboard")
 
 ;; Final setup
 (load-library "skin")
