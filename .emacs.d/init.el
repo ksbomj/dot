@@ -6,6 +6,12 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/exwm-0.24")
 (add-to-list 'load-path "~/.emacs.d/elpa/xelb-0.18")
 
+(load-library "packages")
+
+
+;; Final setup
+(load-library "skin")
+
 
 (load-library "workspace-window-manager")
 
