@@ -1,0 +1,55 @@
+#!/bin/sh
+
+SETUP_USER=ksbomj
+GIT_NAME="Andrii Tarykin"
+GIT_EMAIL="ksbomj@gmail.com"
+
+
+# Installs required packages
+install_packages(){
+	#pianobar is pandora console player
+
+	pkg_add git \
+		wget \
+		htop \
+		emacs \
+		fish \
+		pianobar \
+		rxvt-unicode \
+		screenfetch \
+		terminus-font \
+		irssi
+}
+
+# Configures user and user permissions
+configure_user(){
+	# Creating user
+	adduser -m $SETUP_USER
+
+	# Assigning groups
+	usermod -G wheel operator staff $SETUP_USER
+
+	# Configure doas
+	echo "permit persist keepenv $SETUP_USER" > /etc/doas.conf
+
+	doas -u $SETUP_USER sh <<EOF
+		cd
+		rm -rf .emacs.d/
+		git clone https://github.com/ksbomj/dot.git
+		ln -s dot/.emacs.d .emacs.d
+		ln -s dot/.Xresources .Xresources
+		ln -s dot/.xsession .xsession
+		ln -s .emacs.d/folders folders
+		chsh -s /usr/local/bin/fish $SETUP_USER
+		git config --global user.name "$GIT_NAME"
+		git config --global user.email "$GIT_EMAIL"
+		git config --global core.editor "emacsclient"
+EOF
+}
+
+main(){
+	install_packages
+	configure_user
+}
+
+main
