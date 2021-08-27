@@ -5,5 +5,4 @@
 
 (sml/setup)
 
-(if window-system
-    (load-library "gui")
+(load-library "gui")
