@@ -4,7 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/exwm-0.24")
 (add-to-list 'load-path "~/.emacs.d/elpa/xelb-0.18")
 
-load-library "window-manager")
+(load-library "workspace-window-manager")
 
 (setq locate-command "locate")
 (setq inferior-lisp-program "/usr/local/bin/ecl")

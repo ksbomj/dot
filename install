@@ -26,11 +26,13 @@ configure_user(){
 	# Creating user
 	adduser -m $SETUP_USER
 
-	# Assigning groups
-	usermod -G wheel operator staff $SETUP_USER
-
 	# Configure doas
 	echo "permit persist keepenv $SETUP_USER" > /etc/doas.conf
+
+	# Assigning groups
+	usermod -G wheel $SETUP_USER
+	usermod -G operator $SETUP_USER
+	usermod -G staff $SETUP_USER
 
 	doas -u $SETUP_USER sh <<EOF
 		cd
