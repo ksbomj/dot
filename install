@@ -10,6 +10,7 @@ install_packages(){
 	#pianobar is pandora console player
 
 	pkg_add git \
+		go \
 		wget \
 		htop \
 		emacs \
@@ -18,7 +19,10 @@ install_packages(){
 		rxvt-unicode \
 		screenfetch \
 		terminus-font \
+		links \
 		irssi
+
+	sh ./docker/install
 }
 
 # Configures user and user permissions

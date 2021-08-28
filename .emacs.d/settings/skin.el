@@ -1,3 +1,5 @@
+(use-package smart-mode-line)
+
 (setq sml/mode-width 'full)
 (setq sml/name-width 20)
 (setq sml/shorten-modes 't)
