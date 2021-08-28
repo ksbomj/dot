@@ -28,10 +28,10 @@ install_packages(){
 # Configures user and user permissions
 configure_user(){
 	# Creating user
-	adduser -m $SETUP_USER
+	adduser $SETUP_USER
 
 	# Configure doas
-	echo "permit persist keepenv $SETUP_USER" > /etc/doas.conf
+	echo "permit persist keepenv $SETUP_USER\n\n# root as root\npermit nopass keepenv root as root" > /etc/doas.conf
 
 	# Assigning groups
 	usermod -G wheel $SETUP_USER
