@@ -3,7 +3,10 @@ HOME_DIRS = \
 	$(HOME)/.emacs.d
 
 SYMLINKS = \
-	$(HOME)/.emacs.d/init.el
+	$(HOME)/.emacs.d/init.el \
+	$(HOME)/.emacs.d/settings \
+	$(HOME)/.emacs.d/themes \
+	$(HOME)/.emacs.d/mods
 
 OPENBSD_SYMLINKS = \
 	$(HOME)/.xsession \
@@ -18,22 +21,33 @@ ifeq ($(OS), Darwin)
 	@make macos/setup
 endif
 
-macos/setup: common/dirs common/symlinks ## Setup for MacOS
+macos/setup: common/dirs common/symlinks    ## Setup for MacOS
 
 openbsd/setup: common/dirs common/symlinks ## Setup for OpenBSD
 
-guix/setup: common/dirs common/symlinks ## Setup for Guix
+freebsd/setup: common/dirs common/symlinks   ## Setup for FreeBSD
+
+guix/setup: common/dirs common/symlinks        ## Setup for Guix
 
 .PHONY: help
 help:
 	@grep -E '^[a-zA-Z_()$$. /-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-common/symlinks: | $(SYMLINKS)  ## Configures a common symlinks
+common/symlinks: | $(SYMLINKS) 
 
-$(HOME)/.emacs.d/init.el: | $(HOME)/.emacs.d ## Emacs initialization file
+$(HOME)/.emacs.d/init.el: | $(HOME)/.emacs.d
 	$(ln) $(PWD)/emacs/init.el $@
 
-common/dirs: | $(HOME_DIRS) ## Creates a common directory
+$(HOME)/.emacs.d/settings: | $(HOME)/.emacs.d/settings
+	$(ln) $(PWD)/emacs/settings $@
+
+$(HOME)/.emacs.d/themes: | $(HOME)/.emacs.d/themes
+	$(ln) $(PWD)/emacs/themes $@
+
+$(HOME)/.emacs.d/mods: | $(HOME)/.emacs.d/mods
+	$(ln) $(PWD)/emacs/mods $@
+
+common/dirs: | $(HOME_DIRS)
 
 $(HOME)/.emacs.d:
 	mkdir -p $(HOME)/.emacs.d
