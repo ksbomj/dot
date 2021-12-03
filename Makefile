@@ -13,6 +13,9 @@ OPENBSD_SYMLINKS = \
 	$(HOME)/.xsession \
 	$(HOME)/.Xresources
 
+LANGUAGES = \
+	languages/go
+
 ln=ln -s
 
 .PHONY: setup
@@ -22,13 +25,19 @@ ifeq ($(OS), Darwin)
 	@make macos/setup
 endif
 
-macos/setup: common/dirs common/symlinks macos/setup/programs  macos/setup/fonts   ## Setup for MacOS
+languages: | $(LANGUAGES) ## Configures programming languges
+
+languages/go:
+	GO111MODULE=on go get golang.org/x/tools/gopls@latest
+
+macos/setup: common/dirs common/symlinks macos/setup/programs  macos/setup/fonts languages  ## Setup for MacOS
 
 macos/setup/programs:
 	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	brew install go
 
 macos/setup/fonts:
-	brew install svn
+	brew install svn emacs
 	brew tap homebrew/cask-fonts
 	brew install --cask font-fira-code font-cantarell
 

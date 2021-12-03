@@ -13,13 +13,19 @@
 ;; Theme setup
 (load-library "srm-skin")
 
+;; C-h runs a menu
 (use-package which-key
   :init (which-key-mode)
   :diminish which-key-mode
   :config
   (setq which-key-idle-delay 1))
 
+;; C-s
 (use-package swiper)
+
+;; Ivy
+
+(use-package find-file-in-project)
 
 (use-package ivy
   :diminish
@@ -39,6 +45,50 @@
   :config
   (ivy-mode 1))
 
+(use-package all-the-icons-ivy)
+
+(use-package ivy-rich
+  :after ivy
+  :init
+  (ivy-rich-mode 1))(use-package ivy-rich
+  :init
+  (ivy-rich-mode 1))
+
+(use-package all-the-icons-ivy-rich)
+
+(use-package counsel
+  :bind (("M-x" . counsel-M-x)
+	 ("C-x b" . counsel-ibuffer)
+	 ("C-x C-f" . counsel-find-file)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
+  :config
+  (setq ivy-initial-inputs-alist nil))
+
+(use-package helpful
+  :commands (helpful-callable helpful-variable helpful-command helpful-key)
+  :custom
+  (counsel-describe-function-function #'helpful-callable)
+  (counsel-describe-variable-function #'helpful-variable)
+  :bind
+  ([remap describe-function] . counsel-describe-function)
+  ([remap describe-command] . helpful-command)
+  ([remap describe-variable] . counsel-describe-variable)
+  ([remap describe-key] . helpful-key))
+
 (load-library "srm-programming-languages")
 
 (load-library "srm-org")
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(find-file-in-project counsel zenburn-theme which-key visual-fill-column use-package swiper smart-mode-line org-bullets lsp-ui lsp-treemacs lsp-ivy go-guru doom-themes doom-modeline)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

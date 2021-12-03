@@ -1,3 +1,6 @@
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :init
@@ -14,6 +17,9 @@
   :after lsp)
 
 (use-package lsp-ivy)
+
+;; Package required by go-lsp
+(use-package smartparens)
 
 ;; Go
 (use-package go-mode
