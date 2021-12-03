@@ -5,6 +5,7 @@
 (add-to-list 'load-path "~/.emacs.d/mods")
 (add-to-list 'load-path "~/.emacs.d/settings")
 (add-to-list 'load-path "~/.emacs.d/themes")
+(add-to-list 'load-path "~/.emacs.d/org")
 
 ;; Package registry setup
 (load-library "srm-packages")
@@ -39,3 +40,5 @@
   (ivy-mode 1))
 
 (load-library "srm-programming-languages")
+
+(load-library "srm-org")

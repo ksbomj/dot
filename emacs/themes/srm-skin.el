@@ -1,3 +1,13 @@
+;; Font Configuration ----------------------------------------------------------
+
+;;(set-face-attribute 'default nil :font "Fira Code Retina" :height runemacs/default-font-size)
+
+;; Set the fixed pitch face
+(set-face-attribute 'fixed-pitch nil :font "Fira Code Retina" :height 260)
+
+;; Set the variable pitch face
+(set-face-attribute 'variable-pitch nil :font "Cantarell" :height 295 :weight 'regular)
+
 (use-package smart-mode-line)
 
 (setq sml/mode-width 'full)

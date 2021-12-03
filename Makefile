@@ -6,7 +6,8 @@ SYMLINKS = \
 	$(HOME)/.emacs.d/init.el \
 	$(HOME)/.emacs.d/settings \
 	$(HOME)/.emacs.d/themes \
-	$(HOME)/.emacs.d/mods
+	$(HOME)/.emacs.d/mods \
+        $(HOME)/.emacs.d/org
 
 OPENBSD_SYMLINKS = \
 	$(HOME)/.xsession \
@@ -21,7 +22,15 @@ ifeq ($(OS), Darwin)
 	@make macos/setup
 endif
 
-macos/setup: common/dirs common/symlinks    ## Setup for MacOS
+macos/setup: common/dirs common/symlinks macos/setup/programs  macos/setup/fonts   ## Setup for MacOS
+
+macos/setup/programs:
+	/bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+macos/setup/fonts:
+	brew install svn
+	brew tap homebrew/cask-fonts
+	brew install --cask font-fira-code font-cantarell
 
 openbsd/setup: common/dirs common/symlinks ## Setup for OpenBSD
 
@@ -46,6 +55,9 @@ $(HOME)/.emacs.d/themes: | $(HOME)/.emacs.d/themes
 
 $(HOME)/.emacs.d/mods: | $(HOME)/.emacs.d/mods
 	$(ln) $(PWD)/emacs/mods $@
+
+$(HOME)/.emacs.d/org: | $(HOME)/.emacs.d/org
+	$(ln) $(PWD)/emacs/org $@
 
 common/dirs: | $(HOME_DIRS)
 
