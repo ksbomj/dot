@@ -4,6 +4,7 @@ HOME_DIRS = \
 
 SYMLINKS = \
 	$(HOME)/.emacs.d/init.el \
+	$(HOME)/.emacs.d/features \
 	$(HOME)/.emacs.d/settings \
 	$(HOME)/.emacs.d/themes \
 	$(HOME)/.emacs.d/mods \
@@ -37,7 +38,7 @@ macos/setup/programs:
 	brew install go
 
 macos/setup/fonts:
-	brew install svn emacs
+	brew install ripgrep svn emacs
 	brew tap homebrew/cask-fonts
 	brew install --cask font-fira-code font-cantarell
 
@@ -51,7 +52,7 @@ guix/setup: common/dirs common/symlinks        ## Setup for Guix
 help:
 	@grep -E '^[a-zA-Z_()$$. /-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-common/symlinks: | $(SYMLINKS) 
+common/symlinks: | $(SYMLINKS)
 
 $(HOME)/.emacs.d/init.el: | $(HOME)/.emacs.d
 	$(ln) $(PWD)/emacs/init.el $@
@@ -67,6 +68,9 @@ $(HOME)/.emacs.d/mods: | $(HOME)/.emacs.d/mods
 
 $(HOME)/.emacs.d/org: | $(HOME)/.emacs.d/org
 	$(ln) $(PWD)/emacs/org $@
+
+$(HOME)/.emacs.d/features: | $(HOME)/.emacs.d/features
+	$(ln) $(PWD)/emacs/features $@
 
 common/dirs: | $(HOME_DIRS)
 
