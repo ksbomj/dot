@@ -55,8 +55,3 @@
 
 (eval-after-load 'speedbar
   '(speedbar-add-supported-extension ".go"))
-
-;;(use-package company-go
-;;  :hook (o-mode-hook . (lambda ()
-;;			 (set (make-local-variable 'company-backends)
-;;			 (company-mode))

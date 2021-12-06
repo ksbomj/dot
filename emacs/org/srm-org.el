@@ -17,6 +17,12 @@
 	org-hide-emphasis-markers t)
  (srm/org-font-setup))
 
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("go" . "src go"))
+(add-to-list 'org-structure-template-alist '("elm" . "src elm"))
+
 (use-package org-bullets
   :after org
   :hook (org-mode . org-bullets-mode)
@@ -51,3 +57,10 @@
 
 (use-package visual-fill-column
   :hook (org-mode . srm/org-mode-visual-fill))
+
+(use-package ob-go)
+
+(org-babel-do-load-languages
+  'org-babel-load-languages
+  '((emacs-lisp . t)
+    (go . t)))

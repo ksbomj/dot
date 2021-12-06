@@ -1,3 +1,4 @@
+
 ;; Font Configuration ----------------------------------------------------------
 
 ;;(set-face-attribute 'default nil :font "Fira Code Retina" :height runemacs/default-font-size)
@@ -48,6 +49,7 @@
 
 ;; Disable line numbers for listed modes
 (dolist (mode '(org-mode-hook
+		vterm-mode-hook
 		term-mode-hook
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))

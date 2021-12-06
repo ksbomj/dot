@@ -38,7 +38,7 @@ macos/setup/programs:
 	brew install go
 
 macos/setup/fonts:
-	brew install ripgrep svn emacs
+	brew install ncurses cmake  ripgrep svn emacs
 	brew tap homebrew/cask-fonts
 	brew install --cask font-fira-code font-cantarell
 

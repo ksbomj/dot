@@ -7,8 +7,14 @@
 (add-to-list 'load-path "~/.emacs.d/themes")
 (add-to-list 'load-path "~/.emacs.d/org")
 
+;; Manage files
+(load-library "srm-manage-files")
+
 ;; Package registry setup
 (load-library "srm-packages")
+
+;; Terminal
+(load-library "srm-terminal")
 
 ;; Theme setup
 (load-library "srm-skin")
@@ -88,7 +94,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(company-box company-go company git-commit magit counsel-projectile projectile find-file-in-project counsel zenburn-theme which-key visual-fill-column use-package swiper smart-mode-line org-bullets lsp-ui lsp-treemacs lsp-ivy go-guru doom-themes doom-modeline)))
+   '(php-mode yaml-mode ob-go dired-hide-dotfiles dired-open all-the-icons-dired dired-single vterm eterm-256color company-box company-go company git-commit magit counsel-projectile projectile find-file-in-project counsel zenburn-theme which-key visual-fill-column use-package swiper smart-mode-line org-bullets lsp-ui lsp-treemacs lsp-ivy go-guru doom-themes doom-modeline)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
