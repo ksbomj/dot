@@ -41,6 +41,12 @@
 ;; Package required by go-lsp
 (use-package smartparens)
 
+;; Flycheck
+(use-package flycheck
+  :diminish flycheck-mode
+  :custom
+  (flycheck-php-executable "/usr/local/bin/php"))
+
 ;; Go
 (use-package go-mode
   :init
@@ -50,8 +56,40 @@
   :hook ((go-mode . lsp)
          (go-mode . smartparens-mode)))
 
+(add-hook 'before-save-hook #'gofmt-before-save)
+
 (use-package go-guru
   :after go-mode)
 
 (eval-after-load 'speedbar
   '(speedbar-add-supported-extension ".go"))
+
+;; PHP
+(defvar srm/phpcbf-executable "~/.php/phpcbf.phar")
+(defvar srm/php-style "PSR12")
+(defvar srm/phpcs-executable "~/.php/phpcs.phar")
+
+(use-package php-mode
+  :defer t)
+
+(use-package company-php
+  :defer
+  :after company)
+
+(add-hook 'php-mode-hook '(lambda ()
+			    (ac-php-core-eldoc-setup)
+			    (set (make-local-variable 'company-backends)
+				 '(company-ac-php-backend company-capf company-dabbrev-code
+							  company-files))))
+
+(use-package flycheck
+  :ensure t
+  :config
+  (setq flycheck-php-phpcs-executable srm/phpcs-executable
+	flycheck-phpcs-standard	srm/php-style))
+
+
+(use-package web-mode
+  :commands web-mode
+  :mode (("\\.html\\'" . web-mode)
+	 ("\\.blade.php\\'" . web-mode)))

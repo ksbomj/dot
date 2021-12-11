@@ -22,19 +22,13 @@
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 
-;;(use-package doom-themes
-;; :init (load-theme 'doom-dracula t))
+(use-package doom-themes
+ :init (load-theme 'doom-dracula t))
 
-(use-package zenburn-theme
-  :init (load-theme 'zenburn  t))
+;;(use-package zenburn-theme
+;;  :init (load-theme 'zenburn  t))
 
 (sml/apply-theme 'respectful)
-
-(set-face-attribute 'default nil
-                    :family "Terminus" :height 160 :weight 'normal)
-
-(set-face-attribute 'variable-pitch nil
-                    :family "Open Baskerville 0.0.75" :height 130 :weight 'normal)
 
 (use-package doom-modeline
   :ensure t
