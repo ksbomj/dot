@@ -64,6 +64,12 @@
 (eval-after-load 'speedbar
   '(speedbar-add-supported-extension ".go"))
 
+
+;; before install go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0
+(use-package flycheck-golangci-lint
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
+
 ;; PHP
 (defvar srm/phpcbf-executable "~/.php/phpcbf.phar")
 (defvar srm/php-style "PSR12")
@@ -93,3 +99,17 @@
   :commands web-mode
   :mode (("\\.html\\'" . web-mode)
 	 ("\\.blade.php\\'" . web-mode)))
+
+
+
+;; Elm setup
+(use-package elm-mode)
+  ;; :config
+  ;;(elm-format-on-save t)
+  ;;(add-hook 'elm-mode-hook #'elm-oracle-setup-completion)
+  ;;(add-to-list 'company-backends 'company-elm))
+
+(use-package flycheck-elm
+  :ensure t
+  :after (flycheck)
+  :config (add-hook 'flycheck-mode-hook #'flycheck-elm-setup))
