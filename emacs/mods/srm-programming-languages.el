@@ -58,6 +58,11 @@
 
 (add-hook 'before-save-hook #'gofmt-before-save)
 
+(use-package flycheck-golangci-lint
+  :ensure t
+  :if (executable-find "golangci-lint")
+  :hook (go-mode . flycheck-golangci-lint-setup))
+
 (use-package go-guru
   :after go-mode)
 
@@ -66,9 +71,9 @@
 
 
 ;; before install go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.43.0
-(use-package flycheck-golangci-lint
-  :ensure t
-  :hook (go-mode . flycheck-golangci-lint-setup))
+;;(use-package flycheck-golangci-lint
+;;  :ensure t
+;;  :hook (go-mode . flycheck-golangci-lint-setup))
 
 ;; PHP
 (defvar srm/phpcbf-executable "~/.php/phpcbf.phar")

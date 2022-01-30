@@ -83,6 +83,13 @@
   (org-roam-setup)
   (org-roam-db-autosync-mode))
 
+
+;; Presentations
+
+(use-package org-tree-slide
+  :custom
+  (org-image-actual-width nil))
+
 ;; Programming Languages for OrgMode
 
 (use-package ob-go)
